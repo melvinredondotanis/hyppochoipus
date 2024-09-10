@@ -1,24 +1,22 @@
 #!/usr/bin/env python3
 
-import whisper
+from faster_whisper import WhisperModel
+import torch
 
 from header import welcome
 from record import record
 
+# Settings
+model_size = "large-v3"
 
 def main():
     welcome()
     filename = record()
-    model = whisper.load_model("medium")
-    audio = whisper.load_audio(filename)
-    audio = whisper.pad_or_trim(audio)
-    mel = whisper.log_mel_spectrogram(audio).to(model.device)
-    _, probs = model.detect_language(mel)
-    print("Language detected: {}".format(max(probs, key=probs.get)))
-    options = whisper.DecodingOptions()
-    result = whisper.decode(model, mel, options)
-    print(result.text)
-
+    model = WhisperModel(model_size, device="cpu", compute_type="int8")
+    segments, info = model.transcribe(filename, beam_size=5)
+    print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
+    for segment in segments:
+        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
 
 if __name__ == "__main__":
     main()
