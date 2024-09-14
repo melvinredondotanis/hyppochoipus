@@ -75,7 +75,7 @@ pip install -r requirements.txt
 **UNIX-like**
 
 ```bash
-python main.py
+./main.py
 ```
 
 **Windows**
