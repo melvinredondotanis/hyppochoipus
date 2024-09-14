@@ -15,5 +15,6 @@ def welcome():
     print("Contibutors:")
     print("    - Remi Marçais")
     print("")
+    print("To exit press Ctrl+C")
     input("Press Enter to start...")
     system("clear")

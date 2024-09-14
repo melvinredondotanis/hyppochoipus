@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
+from os import remove
+
 from faster_whisper import WhisperModel
 
 from header import welcome
 from record import record
 
 # Settings
+filename = "audio.wav"
 model_size = "large-v3"
 
 
@@ -20,4 +23,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt or EOFError:
+        print("\nProgram terminated by user")
+    finally:
+        print("Cleaning up...")
+        try:
+            remove(filename)
+        except FileNotFoundError:
+            pass
