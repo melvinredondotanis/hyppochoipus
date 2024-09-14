@@ -18,17 +18,20 @@ def record(filename="audio.wav", duration=5, sample_rate=16000):
         str: The name of the output file.
     """
 
-    if not isinstance(filename, str):
-        raise ValueError("record: filename must be a string")
+    if not isinstance(filename, str) or filename == "":
+        raise ValueError(
+            "record: filename must be a string and cannot be empty"
+            )
 
-    if filename == "":
-        raise ValueError("record: filename cannot be an empty string")
+    if not isinstance(duration, int) or duration <= 0:
+        raise ValueError(
+            "record: duration must be an integer and greater than 0"
+            )
 
-    if not isinstance(duration, int):
-        raise ValueError("record: duration must be an integer")
-
-    if not isinstance(sample_rate, int):
-        raise ValueError("record: sample_rate must be an integer")
+    if not isinstance(sample_rate, int) or sample_rate <= 0:
+        raise ValueError(
+            "record: sample_rate must be an integer and greater than 0"
+            )
 
     print(f"Recording... ({int(duration)}s)")
     try:
