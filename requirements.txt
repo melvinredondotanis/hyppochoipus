@@ -1,5 +1,3 @@
-faster_whisper
 pycodestyle
-torch
+faster_whisper
 scipy
-sounddevice
