@@ -21,6 +21,7 @@ def main():
         print()
         messages.append({"role": "user", "content": user_input})
         message = chat(messages)
+        print("\nHYPPCHOIPUS: {}".format(message["content"]))
         messages.append(message)
         print("\n\n")
         students -= 1

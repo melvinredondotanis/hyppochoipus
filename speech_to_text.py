@@ -51,7 +51,10 @@ def speech_to_text(model_size, language):
         print(e)
         return ""
 
-    return "".join(segment.text for segment in segments)
+    text = "".join(segment.text for segment in segments)
+    print("\nUSER: {}".format(text))
+
+    return text
 
 
 if __name__ == "__main__":
