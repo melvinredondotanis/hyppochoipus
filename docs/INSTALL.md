@@ -67,19 +67,19 @@ pip install -r requirements.txt
 
     ```bash
     ollama install llama3.1
-    ollama create [hyppochoipus Modelfile path]
+    ollama create ./[from models]
     ```
 
 7. Run the application
 
-**UNIX-like**
+    **UNIX-like**
 
-```bash
-./main.py
-```
+    ```bash
+    ./main.py
+    ```
 
-**Windows**
+    **Windows**
 
-```powershell
-python main.py
-```
+    ```powershell
+    python main.py
+    ```
