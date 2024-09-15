@@ -1,3 +1,4 @@
 pycodestyle
 faster_whisper
+torch
 scipy

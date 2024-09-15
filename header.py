@@ -18,3 +18,7 @@ def welcome():
     print("To exit press Ctrl+C")
     input("Press Enter to start...")
     system("clear")
+
+
+if __name__ == "__main__":
+    welcome()

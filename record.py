@@ -18,28 +18,23 @@ def record(filename="audio.wav", duration=5, sample_rate=16000):
         str: The name of the output file.
     """
 
-    if not isinstance(filename, str) or filename == "":
-        raise ValueError(
-            "record: filename must be a string and cannot be empty"
-            )
+    if not filename:
+        raise ValueError("record: filename must be a non-empty string")
 
-    if not isinstance(duration, int) or duration <= 0:
-        raise ValueError(
-            "record: duration must be an integer and greater than 0"
-            )
+    if duration <= 0:
+        raise ValueError("record: duration must be greater than 0")
 
-    if not isinstance(sample_rate, int) or sample_rate <= 0:
-        raise ValueError(
-            "record: sample_rate must be an integer and greater than 0"
-            )
+    if sample_rate <= 0:
+        raise ValueError("record: sample_rate must be greater than 0")
 
     print(f"Recording... ({int(duration)}s)")
     try:
-        audio_data = sounddevice.rec(int(duration * sample_rate),
-                                     samplerate=sample_rate,
-                                     channels=1,
-                                     dtype='int16'
-                                     )
+        audio_data = sounddevice.rec(
+                                    int(duration * sample_rate),
+                                    samplerate=sample_rate,
+                                    channels=1,
+                                    dtype='int16'
+                                    )
         sounddevice.wait()
     except sounddevice.PortAudioError as e:
         print(e)
@@ -53,3 +48,8 @@ def record(filename="audio.wav", duration=5, sample_rate=16000):
         return
 
     return filename
+
+
+if __name__ == "__main__":
+    name = record()
+    print("Audio saved as {}".format(name))

@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 
 from os import remove
-
-from faster_whisper import WhisperModel
-
 from header import welcome
 from speech_to_text import speech_to_text
-from ollama import *
+from ollama import chat
 
 def main():
     messages = []
@@ -24,11 +21,8 @@ if __name__ == "__main__":
     try:
         welcome()
         main()
-    except KeyboardInterrupt or EOFError:
+    except (KeyboardInterrupt, EOFError):
         print("\nProgram terminated by user")
     finally:
         print("Cleaning up...")
-        try:
-            remove("audio.wav")
-        except FileNotFoundError:
-            pass
+        remove("audio.wav")
