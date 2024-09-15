@@ -5,6 +5,11 @@ from header import welcome, settings
 from speech_to_text import speech_to_text
 from ollama import chat
 
+say_hello = {
+    "en": "Welcomes all students for the ceremony.",
+    "fr": "Souhaite la bienvenue pour la cérémonie."
+    }
+
 
 def main():
     try:
@@ -13,6 +18,10 @@ def main():
         return
 
     messages = []
+    messages.append({"role": "asssistant", "content": say_hello[language]})
+    message = chat(messages)
+    messages.append(message)
+    print("\nHYPPCHOIPUS: {}".format(message["content"]))
     while students > 0:
         user_input = speech_to_text(model, language)
         if not user_input:
@@ -23,7 +32,6 @@ def main():
         message = chat(messages)
         print("\nHYPPCHOIPUS: {}".format(message["content"]))
         messages.append(message)
-        print("\n\n")
         students -= 1
 
 
