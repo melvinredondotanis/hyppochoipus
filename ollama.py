@@ -21,16 +21,27 @@ def chat(messages, model=model, server=server):
         dict: The response from the model.
     """
 
-    r = requests.post(
-                    server,
-                    json={
-                        "model": model,
-                        "messages": messages,
-                        "stream": True},
-                    stream=True
-                    )
+    if not isinstance(messages, list) or not messages:
+        raise ValueError("chat: messages must be a list")
+    if not isinstance(model, str) or model == "":
+        raise ValueError("chat: model must be a non-empty string")
+    if not isinstance(server, str) or server == "":
+        raise ValueError("chat: server must be a non-empty string")
 
-    r.raise_for_status()
+    try:
+        r = requests.post(
+                        server,
+                        json={
+                            "model": model,
+                            "messages": messages,
+                            "stream": True},
+                        stream=True
+                        )
+        r.raise_for_status()
+    except Exception as e:
+        print(e)
+        return
+
     output = ""
     for line in r.iter_lines():
         body = json.loads(line)

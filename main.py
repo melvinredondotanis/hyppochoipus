@@ -7,7 +7,11 @@ from ollama import chat
 
 
 def main():
-    model, language, students = settings()
+    try:
+        model, language, students = settings()
+    except TypeError:
+        return
+
     messages = []
     while students > 0:
         user_input = speech_to_text(model, language)
