@@ -2,5 +2,13 @@
     "welcome": {
         "en": "Make a short welcome message for the house allocation ceremony.",
         "fr": "Fais un court message de bienvenue pour la cérémonie de répartition des maisons."
+    },
+    "house": {
+        "en": "You've just finished asking {student_name} the questions and, after some thought, you've chosen {house}. Write a short sentence to tell him about your decision",
+        "fr": "Tu viens de finir de poser les questions à {student_name} et après avoir réfléchi, tu as choisi {house}. Fait une courte phrase pour lui annoncer ta décision"
+    },
+    "end": {
+        "en": "The ceremony is now over. Thanks everyone",
+        "fr": "La cérémonie est maintenant terminée. Remercie tout le monde"
     }
 }

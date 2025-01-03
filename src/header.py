@@ -45,15 +45,5 @@ def settings():
     display_options(languages)
     language_number = get_selection('Select a language [number]: ', languages)
 
-    while True:
-        try:
-            students_number = int(input('Select the number of \
-                                        students [number]: '))
-            break
-        except ValueError:
-            print('Invalid input. Please enter a valid number.')
-
     system('clear')
-    return (
-        models[model_number], languages[language_number], students_number
-    )
+    return models[model_number], languages[language_number]
