@@ -7,6 +7,7 @@ import ollama
 
 from header import welcome, settings
 from loaders import get_students_from_json, get_message_by_type
+from voice import TextToSpeech
 
 
 MODEL = 'hyppochoipus'
@@ -19,6 +20,7 @@ def choose_house():
 
 
 def say(message):
+    VOICE.say(message['response'])
     print(message['response'])
 
 
@@ -44,6 +46,8 @@ def main():
 
     whisper_model, language = settings()
 
+    global VOICE
+    VOICE = TextToSpeech(language=language)
     students = get_students_from_json('config/students.json')
     message = get_message_by_type(MESSAGES_FILE, language, 'welcome')
 
