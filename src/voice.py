@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-
 import torch
 from TTS.api import TTS
 import simpleaudio as sa
@@ -19,28 +18,27 @@ class TextToSpeech:
         self.voice_model = voice_model
         self.output_path = output_path
 
-        if torch.cuda.is_available():
-            self.device = "cuda"
-        else:
-            self.device = "cpu"
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
-        self.tts = TTS(
-            model_name,
-            progress_bar=debug
-            ).to(self.device)
+        try:
+            self.tts = TTS(model_name, progress_bar=debug).to(self.device)
+        except Exception as e:
+            raise RuntimeError(f"Failed to initialize TTS model: {e}")
 
     def say(self, text):
-        output_path = self.tts.tts_to_file(
-            text=text,
-            speaker_wav=self.voice_model,
-            language=self.language,
-            file_path=self.output_path
-        )
+        try:
+            output_path = self.tts.tts_to_file(
+                text=text,
+                speaker_wav=self.voice_model,
+                language=self.language,
+                file_path=self.output_path
+            )
 
-        wave_obj = sa.WaveObject.from_wave_file(self.output_path)
-        play_obj = wave_obj.play()
-        play_obj.wait_done()
+            wave_obj = sa.WaveObject.from_wave_file(self.output_path)
+            play_obj = wave_obj.play()
+            play_obj.wait_done()
 
-
-        os.remove(self.output_path)
-        return output_path
+            os.remove(self.output_path)
+            return output_path
+        except Exception as e:
+            raise RuntimeError(f"Error during TTS processing: {e}")
