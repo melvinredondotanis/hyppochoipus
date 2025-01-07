@@ -65,7 +65,7 @@ Here’s a glimpse of possible dialogues:
 
 5. Run the application:
     ```bash
-    python main.py
+    python src/main.py
     ```
 
 ## Configuration
