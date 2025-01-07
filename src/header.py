@@ -45,5 +45,7 @@ def settings():
     display_options(languages)
     language_number = get_selection('Select a language [number]: ', languages)
 
+    tts_status = str(input('Do you want to enable TTS? [Y/n]: '))
+
     system('clear')
-    return models[model_number], languages[language_number]
+    return models[model_number], languages[language_number], tts_status.lower() in ['y', 'yes', '']
