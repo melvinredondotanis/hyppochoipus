@@ -14,5 +14,21 @@
     "end": {
         "en": "The ceremony is now over. Thanks everyone",
         "fr": "La cérémonie est maintenant terminée. Remercie tout le monde"
+    },
+    "question_1": {
+        "en": "Make a question to test their courage and bravery",
+        "fr": "Pose une question pour tester son courage et sa bravoure"
+    },
+    "question_2": {
+        "en": "Make a question to test their intelligence and wit",
+        "fr": "Pose une question pour tester son intelligence et son esprit"
+    },
+    "question_3": {
+        "en": "Make a question to test their loyalty and dedication",
+        "fr": "Pose une question pour tester sa loyauté et son dévouement"
+    },
+    "question_4": {
+        "en": "Make a question to test their ambition and cunning",
+        "fr": "Pose une question pour tester son ambition et sa ruse"
     }
 }

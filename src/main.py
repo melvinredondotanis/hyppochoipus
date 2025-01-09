@@ -7,6 +7,8 @@ import ollama
 
 from header import welcome, settings
 from loaders import get_students_from_json, get_message_by_type
+from voice import TextToSpeech
+from stt import speech_to_text
 
 
 MODEL = 'hyppochoipus'
@@ -47,10 +49,9 @@ def main():
     verify_model(MODEL)
 
     whisper_model, language, tts_status = settings()
+    stt_status = True
 
     if tts_status:
-        from voice import TextToSpeech
-
         global VOICE
         VOICE = TextToSpeech(language=language)
 
@@ -63,7 +64,33 @@ def main():
     for student in students:
         print(f'\n[{student}]')
         sleep(5)
-        house = choose_house()
+
+        student_responses = {}
+
+        for i in range(4):
+            message = get_message_by_type(MESSAGES_FILE, language, 'question_{}'.format(i+1))
+            response = generate_message(MODEL, message)
+
+            if tts_status:
+                say(response)
+            else:
+                print(response['response'])
+
+            sleep(1)
+
+            if stt_status:
+                answer = speech_to_text(whisper_model, language)
+                print(f'[{student}]: {answer}')
+            else:
+                answer = input('Answer: ')
+                print(f'[{student}]: {answer}')
+
+            student_responses[f'question_{i+1}'] = {
+            'question': response['response'],
+            'answer': answer
+            }
+
+        house = choose_house(student_responses)
         message = get_message_by_type(MESSAGES_FILE, language, 'house')
         message = message.replace('{student_name}', student)
         message = message.replace('{house}', house)
@@ -72,6 +99,8 @@ def main():
         say({'response': get_message_by_type(MESSAGES_FILE, language, 'next')})
 
     message = get_message_by_type(MESSAGES_FILE, language, 'end')
+    response = generate_message(MODEL, message)
+    say(response)
 
 
 if __name__ == '__main__':
