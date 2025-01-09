@@ -33,7 +33,7 @@ def record(filename="record.wav", duration=5, sample_rate=16000):
                                     int(duration * sample_rate),
                                     samplerate=sample_rate,
                                     channels=1,
-                                    dtype='int8'
+                                    dtype='int16'
                                     )
         sounddevice.wait()
     except sounddevice.PortAudioError as e:

@@ -87,3 +87,9 @@ venv.bak/
 # Ignore OS generated files
 .DS_Store
 Thumbs.db
+
+# Ignore sound files
+*.mp3
+*.wav
+*.flac
+*.m4a
